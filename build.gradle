@@ -5,13 +5,35 @@
  * For more details take a look at the Java Quickstart chapter in the Gradle
  * User Manual available at https://docs.gradle.org/6.5.1/userguide/tutorial_java_projects.html
  */
-
 plugins {
     // Apply the java plugin to add support for Java
     id 'java'
 
     // Apply the application plugin to add support for building a CLI application.
     id 'application'
+
+    id 'checkstyle'
+}
+
+ext {
+    // build dependencies
+    checkstyleVersion = '8.10'
+
+    // test dependencies
+    junitVersion = '5.2.0'
+    junit4Version = '4.12'
+    mockitoVersion = '2.18.3'
+    textfxVersion = '4.0.11-alpha'
+    truthVersion = '0.40'
+}
+
+apply plugin: "java"
+apply plugin: "checkstyle"
+
+checkstyle {
+    toolVersion = checkstyleVersion
+    configFile = file("${project.rootDir}/config/checkstyle/checkstyle.xml")
+    maxWarnings = 10
 }
 
 repositories {
